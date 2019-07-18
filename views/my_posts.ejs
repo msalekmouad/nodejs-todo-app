@@ -1,0 +1,29 @@
+<%- include('layouts/app_layout.ejs') %>
+<div class="container-fluid h-100 p-0 m-0">
+    <div class="row h-100 justify-content-center no-gutters pt-3">
+        <% if(posts.length > 0) {%>
+            <% posts.forEach(element => { %>
+                <div class="col-lg-7 col-sm-10 posts no-gutters ">
+                    <div class="post shadow-sm">
+                        <a class="close-action badge badge-danger" href="/home/delete/<%= element.todo_id%>"><i class="fas fa-trash-alt"></i> delete post</a>
+                        <a class="close-action2 badge badge-primary" href="/home/edit/<%= element.todo_id%>"><i class="fas fa-edit" ></i> edit post</a>
+                        <div class="row no-gutters ">
+                            <div class="col-md-2">
+                                <div class="avatar">
+                                    <img src="<%= element.todo_icon%>" alt="post_avatar">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="title"> <%= element.todo_title%> </div>
+                                <div class="text"> <%= element.todo_text%> </div>
+                                <div class="time badge badge-warning"> <%= new Date(element.createdAt).toLocaleString()%> </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <% });%>
+        <%}%>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<%- include('layouts/app_layout.ejs') %>
+<div class="container-fluid h-100 p-0 m-0">
+    <div class="row h-100 justify-content-center no-gutters">
+        <div class="col-lg-7 pt-lg-4">
+            <form action="/home/edit/<%= product.todo_id%>" method="post">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-edit"></i>edit post
+                    </div>
+                    <div class="card-body">
+                        <div class="textarea">
+                            <img src="<%= product.todo_icon%>" class="avatar" alt="user_avatar">
+                            <textarea class="w-100 form-control" rows="3" name="todo_text" required ><%= product.todo_text%></textarea>
+                        </div>
+                        <hr class="mx-5">
+                       <div class="form-group m-5">
+                           <div class="input-wrapper">
+                               <i class="far fa-file-alt glyphicon"></i>
+                               <input type="text" class="form-control" name="todo_title" placeholder="Enter the title" value="<%= product.todo_title%>">
+                           </div>
+                           <div class="input-wrapper mt-3">
+                               <i class="fas fa-image glyphicon"></i>
+                               <input type="text" class="form-control" name="todo_icon" placeholder="Enter the image link" value="<%= product.todo_icon%>">
+                           </div>
+                       </div>
+                    </div>
+                    <div class="card-footer d-flex justify-content-end">
+                        <button class="btn btn-sm btn-primary" type="submit"><i class="fas fa-sticky-note mr-2"></i>Apply changes</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+

@@ -1,0 +1,60 @@
+<%- include('layouts/app_layout.ejs') %>
+<div class="container-fluid h-100 p-0 m-0">
+    <div class="row h-100 justify-content-center no-gutters">
+        <div class="col-lg-9 pt-lg-4 p-5">
+            <div class="card ">
+                <div class="card-header text-center ">
+                    <h5><%= postData.todo_title%></h5>
+                </div>
+                <div class="card-body ">
+                    <div class="row no-gutters p-lg-5 p-sm-3">
+                        <div class="col-lg-3 no-gutters  d-flex align-items-center justify-content-center">
+                            <img src="<%= postData.todo_icon%>" alt="<%= postData.todo_title%>" class="postImage ">
+                        </div>
+                        <div class="col-lg-9 no-gutters d-flex  justify-content-center">
+                            <p ><%= postData.todo_text%></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+
+                    <div class="row no-gutters justify-content-center">
+                        <div class="col-lg-12 mb-4">
+                            <div class="badge badge-warning float-right"><i class="far fa-clock mr-1"></i>Posted at : <%= new Date(postData.createdAt).toLocaleString()%></div>
+                            <div class="badge badge-dark float-right mr-2"><i class="far fa-user mr-1"></i> Posted by : <%= userData.name%></div>
+                        </div>
+                        <div class="col-lg-6 col-sm-8 flex-column align-items-center justify-content-center  no-gutters">
+                            <%commentsData.forEach( comment =>{%>
+                                <div class="comment-holder ">
+                                    <h5><%= comment.user.name%></h5>
+                                    <div class="comment-body">
+                                        <p><%= comment.comment_text%></p>
+                                        <span class="time badge badge-secondary ">
+                                            <%= new Date(comment.createdAt).toLocaleString()%>
+                                        </span>
+                                    </div>
+                                </div>
+                            <% });%>
+                        </div>
+                        <div class="col-lg-6 col-sm-4 d-flex align-items-center justify-content-center px-5 h-100 no-gutters">
+                            <form action="/post/<%= postData.todo_id%>/comment" method="post" class="w-100">
+                                <div class="row">
+                                    <div class="col-lg-12 mb-3  no-gutters">
+                                        <textarea name="comment_message" class="form-control mr-2 comment-input" id="" cols="30" rows="10"></textarea>
+                                    </div>
+                                    <div class="col-lg-12  no-gutters">
+                                        <button type="submit" class="btn btn-dark btn-block"><i class="fas fa-paper-plane mr-2"></i>comment</button>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>

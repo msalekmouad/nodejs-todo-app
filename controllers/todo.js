@@ -59,7 +59,6 @@ exports.editTodo =(req,res,next)=>{
         })
         .catch(err => console.log(err));
 };
-
 exports.postEditTodo = (req,res,next)=>{
     const todo_id = req.params.id;
     const _title = req.body.todo_title;

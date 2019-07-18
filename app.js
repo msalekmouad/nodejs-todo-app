@@ -44,9 +44,10 @@ app.use(session({
 }));
 app.use(csrfProtection);
 app.use((req,res,next)=>{
-    res.local.csrfToken = req.csrfToken();
+    res.locals.csrfToken = req.csrfToken();
     next();
 });
+
 //rout
 app.use(todoRoute);
 app.use(userRoute);

@@ -1,6 +1,7 @@
 //import the model
 const Todo = require('../models/Todo');
 const User = require('../models/User');
+const _ = require('lodash');
 exports.getTodo = (req,res,next)=>{
     Todo.findAll({
         include: {
@@ -78,9 +79,9 @@ exports.postEditTodo = (req,res,next)=>{
         .catch(err=> console.log(err));
 };
 exports.getMyPost= (req,res,next)=>{
-    // res.send(Object.keys(req.session.user.__proto__));
-    //res.send(req.session.user);
-    req.session.user.getTodos()
+    //res.send(Object.keys(req.user.__proto__));
+
+    /*req.session.user.getTodos()
         .then( posts =>{
             res.render('my_posts',{
                 pageTitle : 'My posts',
@@ -91,7 +92,7 @@ exports.getMyPost= (req,res,next)=>{
             });
             }
         )
-        .catch(err => console.log(err));
+        .catch(err => console.log(err));*/
 };
 exports.getPost = (req,res,next)=>{
     const todo_id = req.params.id;

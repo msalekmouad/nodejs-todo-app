@@ -45,9 +45,21 @@ app.use(session({
 app.use(csrfProtection);
 app.use((req,res,next)=>{
     res.locals.csrfToken = req.csrfToken();
+    console.log('generated token : '+)
     next();
 });
-
+app.use((req,res,next)=>{
+   User.findByPk(3)
+       .then(user=>{
+          if(user)
+          {
+              req.user = user;
+              next();
+          }else {
+              res.send('User not found');
+          }
+       })
+});
 //rout
 app.use(todoRoute);
 app.use(userRoute);

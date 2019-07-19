@@ -1,0 +1,41 @@
+<%- include('layouts/app_layout.ejs') %>
+<div class="container-fluid h-100 p-0 m-0">
+    <div class="row h-100 justify-content-center no-gutters pt-3">
+        <div class="col-md-5 col-sm-9 pt-lg-5">
+            <form action="/users/reset" method="post" class="login-form">
+                <div class="card">
+                    <card class="card-header ">
+                       User reset password
+                    </card>
+                    <div class="card-body m-5">
+                        <div class="form-group input-wrapper mb-4">
+                            <i class="fas fa-envelope-square glyphicon"></i>
+                            <input type="text" class="form-control rounded-pill" name="email" placeholder="Enter your email">
+                        </div>
+                        <% if(errorMessages.emptyy){%>
+                            <div class="error-message">
+                                <%=errorMessages.emptyy%>
+                            </div>
+                        <% }%>
+                        <% if(errorMessages.notfound){%>
+                        <div class="error-message">
+                            <%=errorMessages.notfound%>
+                        </div>
+                        <% }%>
+                        <% if(errorMessages.error){%>
+                        <div class="error-message">
+                            <%=errorMessages.error%>
+                        </div>
+                        <% }%>
+                    </div>
+                    <div class="card-footer">
+                        <input type="hidden" name="_csrf" value="<%=csrfToken%>">
+                        <button type="submit"  class="btn btn-dark btn-block"><i class="fas fa-sign-in-alt mr-2"></i>Reset password</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

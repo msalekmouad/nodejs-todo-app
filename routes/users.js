@@ -13,5 +13,6 @@ router.post('/users/login',userController.postLogin);
 router.get('/users/logout',userController.logoutUser);
 router.get('/users/register',isNotAuth,userController.getRegister);
 router.post('/users/register',userController.postRegister);
-
+router.get('/users/reset',isNotAuth,userController.getReset);
+router.post('/users/reset',userController.postReset);
 module.exports = router;

@@ -157,3 +157,9 @@ input.comment-input, input.comment-input:hover, input.comment-input:focus{
     box-shadow: none!important;
     outline: none!important;
 }
+.login-form .error-message{
+    font-size: 0.9rem;
+    color: red!important;
+    font-family: 'Montserrat', sans-serif;
+    margin-top: 5px;
+}

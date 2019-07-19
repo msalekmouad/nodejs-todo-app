@@ -15,17 +15,32 @@
                         <div class="form-group input-wrapper mb-4">
                             <i class="fas fa-envelope-square glyphicon"></i>
                             <input type="text" class="form-control rounded-pill" name="email" placeholder="Enter your email">
+                            <% if(errorMessages.exist) {%>
+                            <div class="error-message">
+                                <%=errorMessages.exist%>
+                            </div>
+                            <%}%>
                         </div>
                         <div class="form-group input-wrapper">
                             <i class="fas fa-lock glyphicon"></i>
-                            <input type="text" class="form-control rounded-pill" name="password" placeholder="Enter your password">
+                            <input type="password" class="form-control rounded-pill" name="password" placeholder="Enter your password">
                         </div>
                         <div class="form-group input-wrapper">
                             <i class="fas fa-lock glyphicon"></i>
-                            <input type="text" class="form-control rounded-pill" name="cpassword" placeholder="Confirm your password">
+                            <input type="password" class="form-control rounded-pill" name="cpassword" placeholder="Confirm your password">
+                            <% if(errorMessages.notmatch) {%>
+                            <div class="error-message">
+                                <%=errorMessages.notmatch%>
+                            </div>
+                            <%}%>
                         </div>
                         <input type="hidden" name="_csrf" value="<%=csrfToken%>">
-
+                        <% if(errorMessages.error || errorMessages.empty) {%>
+                            <div class="error-message">
+                                <%=errorMessages.error%>
+                                <%=errorMessages.emptyy%>
+                            </div>
+                        <%}%>
                     </div>
                     <div class="card-footer">
                         <div class="row no-gutters">

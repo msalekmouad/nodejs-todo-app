@@ -14,12 +14,22 @@
                         </div>
                         <div class="form-group input-wrapper">
                             <i class="fas fa-lock glyphicon"></i>
-                            <input type="text" class="form-control rounded-pill" name="password" placeholder="Enter your password">
+                            <input type="password" class="form-control rounded-pill" name="password" placeholder="Enter your password">
                         </div>
                         <div class="form-group form-check float-right">
                             <input type="checkbox" class="form-check-input" name="rememberMe" id="rememberMe">
                             <label class="form-check-label" for="rememberMe">Remember me</label>
                         </div>
+                        <% if(errorMessages.invalid){%>
+                            <div class="error-message">
+                                <%=errorMessages.invalid%>
+                            </div>
+                        <%}%>
+                        <% if(errorMessages.empty){%>
+                        <div class="error-message">
+                            <%=errorMessages.empty%>
+                        </div>
+                        <%}%>
                         <input type="hidden" name="_csrf" value="<%=csrfToken%>">
                     </div>
                     <div class="card-footer">

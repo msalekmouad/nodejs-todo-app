@@ -2,6 +2,7 @@
 const Todo = require('../models/Todo');
 const User = require('../models/User');
 const _ = require('lodash');
+
 exports.getTodo = (req,res,next)=>{
     Todo.findAll({
         include: {
@@ -20,20 +21,22 @@ exports.getTodo = (req,res,next)=>{
         })
     .catch(err => console.log(err));
 };
-
 exports.addTodo =(req,res,next)=>{
     const title = req.body.title;
     const text = req.body.text;
     const icon = req.body.icon;
-
-    req.session.user.createTodo({
-        todo_title: title,
-        todo_text: text,
-        todo_icon : icon
-    })
-    .then(response =>{
-        res.redirect('/home');
-    }).catch(err =>console.log(err));
+    const _user = req.session.user;
+    User.findByPk(_user.id)
+        .then(user=>{
+            return  user.createTodo({
+                todo_title: title,
+                todo_text: text,
+                todo_icon : icon
+            });
+        })
+        .then(response =>{
+            res.redirect('/home');
+        }).catch(err =>console.log(err));
 };
 exports.deleteTodo =(req,res,next)=>{
     const todo_id = req.params.id;
@@ -80,19 +83,23 @@ exports.postEditTodo = (req,res,next)=>{
 };
 exports.getMyPost= (req,res,next)=>{
     //res.send(Object.keys(req.user.__proto__));
+    const _user = req.session.user;
+    User.findByPk(_user.id)
+        .then(user =>{
+            user.getTodos()
+                    .then( posts =>{
+                            res.render('my_posts',{
+                                pageTitle : 'My posts',
+                                pathUrl :'/my_posts',
+                                posts :posts,
+                                isAuthenticated : req.session.userAuth,
+                                user : req.session.user
+                            });
+                        }
+                    )
+        })
+        .catch(err => console.log(err));
 
-    /*req.session.user.getTodos()
-        .then( posts =>{
-            res.render('my_posts',{
-                pageTitle : 'My posts',
-                pathUrl :'/my_posts',
-                posts :posts,
-                isAuthenticated : req.session.userAuth,
-                user : req.session.user
-            });
-            }
-        )
-        .catch(err => console.log(err));*/
 };
 exports.getPost = (req,res,next)=>{
     const todo_id = req.params.id;

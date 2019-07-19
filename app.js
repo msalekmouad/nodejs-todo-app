@@ -9,6 +9,7 @@ const session = require('express-session');
 const MySQLStore = require('express-mysql-session')(session);
 const csrf = require('csurf');
 const csrfProtection = csrf();
+const isAuth = require('./middleware/is-auth');
 //Models
 const Todo = require('./models/Todo');
 const User = require('./models/User');
@@ -45,22 +46,10 @@ app.use(session({
 app.use(csrfProtection);
 app.use((req,res,next)=>{
     res.locals.csrfToken = req.csrfToken();
-    console.log('generated token : '+)
     next();
 });
-app.use((req,res,next)=>{
-   User.findByPk(3)
-       .then(user=>{
-          if(user)
-          {
-              req.user = user;
-              next();
-          }else {
-              res.send('User not found');
-          }
-       })
-});
-//rout
+
+//router
 app.use(todoRoute);
 app.use(userRoute);
 //Associations
@@ -70,9 +59,8 @@ app.use(userRoute);
  Comment.belongsTo(Todo);
  Comment.belongsTo(User);
  User.hasMany(Comment);
+
  //Database Sync
-
-
 sequelize
     .sync()
     .then(res=>{

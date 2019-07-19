@@ -1,5 +1,6 @@
 const User = require('../models/User');
 const bcrypt = require('bcryptjs');
+
 exports.getUsers = (req,res,next)=>{
     User.findAll()
         .then(users=>{
@@ -82,7 +83,6 @@ exports.postLogin = (req,res,next)=>{
     })
         .then(user=>{
             if(user){
-                console.log("user found "+user.name);
                  bcrypt.compare(password,user.password).then(doMatch=>{
                      console.log('password is :'+user.password+" is match : "+doMatch);
                      if(doMatch){
